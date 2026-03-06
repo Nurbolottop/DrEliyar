@@ -4,9 +4,14 @@ import os
 
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# =============================================================================
+# PATHS (ПУТИ)
+# =============================================================================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+# =============================================================================
+# SECURITY (БЕЗОПАСНОСТЬ)
+# =============================================================================
 SECRET_KEY = os.getenv('SECRET_KEY')
 if not SECRET_KEY:
     raise Exception("SECRET_KEY не задан в переменных окружения")
@@ -22,7 +27,9 @@ CSRF_TRUSTED_ORIGINS = [
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-# Application definition
+# =============================================================================
+# APPLICATIONS (ПРИЛОЖЕНИЯ)
+# =============================================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -32,15 +39,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-#ckeditor
+    # Third-party
     'ckeditor',
     'ckeditor_uploader',
     'django_resized',
-#apps
+
+    # Local apps
     'apps.base',
     'apps.cms',
     'apps.contacts',
 ]
+
+# =============================================================================
+# MIDDLEWARE (ПРОМЕЖУТОЧНЫЕ ОБРАБОТЧИКИ)
+# =============================================================================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,9 +64,17 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'core.urls'
+# =============================================================================
+# URLS & WSGI (МАРШРУТЫ И WSGI)
+# =============================================================================
 
-# from core.project_settings.templates import *
+ROOT_URLCONF = 'core.urls'
+WSGI_APPLICATION = 'core.wsgi.application'
+
+
+# =============================================================================
+# TEMPLATES (ШАБЛОНЫ)
+# =============================================================================
 
 TEMPLATES = [
     {
@@ -71,11 +91,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+# =============================================================================
+# DATABASE (БАЗА ДАННЫХ)
+# =============================================================================
 
 DATABASES = {
     'default': {
@@ -88,8 +106,9 @@ DATABASES = {
     }
 }
 
-# Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+# =============================================================================
+# PASSWORD VALIDATION (ВАЛИДАЦИЯ ПАРОЛЕЙ)
+# =============================================================================
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,19 +126,18 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
+# =============================================================================
+# INTERNATIONALIZATION (ИНТЕРНАЦИОНАЛИЗАЦИЯ)
+# =============================================================================
 
 LANGUAGE_CODE = os.getenv('LANGUAGE_CODE', 'ru')
-
 TIME_ZONE = os.getenv('TIME_ZONE', 'Asia/Bishkek')
-
 USE_I18N = True
-
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
+# =============================================================================
+# STATIC & MEDIA FILES (СТАТИЧЕСКИЕ И МЕДИА ФАЙЛЫ)
+# =============================================================================
 
 STATIC_URL = '/static/'
 
@@ -131,10 +149,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
+# =============================================================================
+# DEFAULTS (ЗНАЧЕНИЯ ПО УМОЛЧАНИЮ)
+# =============================================================================
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# =============================================================================
+# CKEDITOR (РЕДАКТОР CKEDITOR)
+# =============================================================================
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
