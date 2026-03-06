@@ -12,7 +12,7 @@
 
 ## Что нужно настроить под себя
 
-В репозитории используются плейсхолдеры вида `*_namex`. Перед стартом желательно заменить их на свои значения.
+В репозитории используются плейсхолдеры вида `*_dreliyar`. Перед стартом желательно заменить их на свои значения.
 
 ### 1) Переменные окружения (.env)
 
@@ -30,14 +30,14 @@ cp .envtest .env
 - `DEBUG` — `True` только для разработки
 - `ALLOWED_HOSTS` — домены/хосты
 - `LANGUAGE_CODE`, `TIME_ZONE`
-- `PROJECT_NAMEx` — имя проекта (используется как общий нейминг)
+- `PROJECT_dreliyar` — имя проекта (используется как общий нейминг)
 
 Postgres:
 
 - `POSTGRES_DB` — имя базы
 - `POSTGRES_USER` — пользователь
 - `POSTGRES_PASSWORD` — пароль
-- `POSTGRES_HOST` — **должен совпадать с именем сервиса БД в docker-compose** (по умолчанию `db_namex`)
+- `POSTGRES_HOST` — **должен совпадать с именем сервиса БД в docker-compose** (по умолчанию `db_dreliyar`)
 - `POSTGRES_PORT` — обычно `5432` внутри сети docker
 
 ### 2) docker-compose: нейминг сервисов/контейнеров/volume/network
@@ -49,17 +49,17 @@ Postgres:
 
 Там есть плейсхолдеры, которые стоит заменить под проект:
 
-- `db_namex` (service namex) — имя сервиса Postgres
-- `container_namex: postgres_db_namex` — имя контейнера Postgres
-- `postgres_data_namex` — имя volume для данных Postgres
-- `redis_namex` / `container_namex: redis_namex` — Redis
-- `web_namex` / `container_namex: django_web_namex` — Django контейнер
-- `telegram_bot` / `container_namex: telegram_bot_namex` — бот
-- `portfolio_network` / `portfolio_network_namex` — docker network
+- `db_dreliyar` (service dreliyar) — имя сервиса Postgres
+- `container_dreliyar: postgres_db_dreliyar` — имя контейнера Postgres
+- `postgres_data_dreliyar` — имя volume для данных Postgres
+- `redis_dreliyar` / `container_dreliyar: redis_dreliyar` — Redis
+- `web_dreliyar` / `container_dreliyar: django_web_dreliyar` — Django контейнер
+- `telegram_bot` / `container_dreliyar: telegram_bot_dreliyar` — бот
+- `portfolio_network` / `portfolio_network_dreliyar` — docker network
 
 Важно:
 
-- `POSTGRES_HOST` в `.env` должен совпадать с **именем сервиса Postgres** (например `db_namex`).
+- `POSTGRES_HOST` в `.env` должен совпадать с **именем сервиса Postgres** (например `db_dreliyar`).
 - В dev-compose проброшены порты:
   - Postgres: `5433:5432` (снаружи 5433)
   - Redis: `6389:6379` (снаружи 6389)
@@ -87,7 +87,7 @@ cp .envtest .env
 docker compose -f docker/docker-compose.yml up --build
 ```
 
-По умолчанию `web_namex` запускает:
+По умолчанию `web_dreliyar` запускает:
 
 - миграции
 - `collectstatic`
@@ -103,7 +103,7 @@ docker compose -f docker/docker-compose.yml up --build
 docker compose -f docker/docker-compose.prod.yml up --build -d
 ```
 
-В прод-конфиге `web_namex` запускается через gunicorn и слушает `0.0.0.0:8000`.
+В прод-конфиге `web_dreliyar` запускается через gunicorn и слушает `0.0.0.0:8000`.
 
 ## Типовые проблемы
 

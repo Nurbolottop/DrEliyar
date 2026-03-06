@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  db_namex:
+  db_dreliyar:
     image: postgres:14
-    container_name: postgres_db_namex
+    container_name: postgres_db_dreliyar
     env_file:
       - ../.env
     ports:
       - "5433:5432"
     volumes:
-      - postgres_data_namex:/var/lib/postgresql/data
+      - postgres_data_dreliyar:/var/lib/postgresql/data
     networks:
       - portfolio_network
     healthcheck:
@@ -18,19 +18,19 @@ services:
       timeout: 5s
       retries: 5
 
-  redis_namex:
+  redis_dreliyar:
     image: redis:6
-    container_name: redis_namex
+    container_name: redis_dreliyar
     ports:
       - "6389:6379"
     networks:
       - portfolio_network
 
-  web_namex:
+  web_dreliyar:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    container_name: django_web_namex
+    container_name: django_web_dreliyar
     command: sh -c "/entrypoint.sh && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver 0.0.0.0:8082"
     volumes:
       - ../app:/app
@@ -39,11 +39,11 @@ services:
     env_file:
       - ../.env
     environment:
-      - DJANGO_SETTINGS_MODULE=core.settings
+      - DJANGO_SETTINGS_MODULE=core.settings.dev
     depends_on:
-      db_namex:
+      db_dreliyar:
         condition: service_healthy
-      redis_namex:
+      redis_dreliyar:
         condition: service_started
     ports:
       - "127.0.0.1:8084:8082"
@@ -54,15 +54,15 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    container_name: telegram_bot_namex
+    container_name: telegram_bot_dreliyar
     command: python manage.py bot
     volumes:
       - ../app:/app       # исправлено
     env_file:
       - ../.env
     depends_on:
-      - db_namex
-      - web_namex
+      - db_dreliyar
+      - web_dreliyar
     networks:
       - portfolio_network
 
@@ -71,4 +71,4 @@ networks:
     driver: bridge
 
 volumes:
-  postgres_data_namex:
+  postgres_data_dreliyar:

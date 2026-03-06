@@ -1,0 +1,15 @@
+SECRET_KEY=dreliyar_super_secret_key_2026_very_safe_12345
+DEBUG=0
+
+ALLOWED_HOSTS=dreliyardentalclinic.webtm.ru,127.0.0.1,localhost
+CSRF_TRUSTED_ORIGINS=https://dreliyardentalclinic.webtm.ru,http://dreliyardentalclinic.webtm.ru
+
+CSRF_COOKIE_SECURE=1
+CSRF_COOKIE_HTTPONLY=0
+CSRF_COOKIE_SAMESITE=Lax
+
+POSTGRES_DB=dreliyar
+POSTGRES_USER=dreliyar_user
+POSTGRES_PASSWORD=dreliyar1234
+POSTGRES_HOST=db_dreliyar
+POSTGRES_PORT=5432

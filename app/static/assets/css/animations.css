@@ -1,0 +1,241 @@
+/* ============================================
+   Dr. Eliyar — Animations
+   ============================================ */
+
+/* --- Scroll Reveal --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal--left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal--left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal--right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal--right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal--scale {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.reveal--scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger children */
+.reveal-stagger>* {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.reveal-stagger.visible>*:nth-child(1) {
+    transition-delay: 0ms;
+}
+
+.reveal-stagger.visible>*:nth-child(2) {
+    transition-delay: 80ms;
+}
+
+.reveal-stagger.visible>*:nth-child(3) {
+    transition-delay: 160ms;
+}
+
+.reveal-stagger.visible>*:nth-child(4) {
+    transition-delay: 240ms;
+}
+
+.reveal-stagger.visible>*:nth-child(5) {
+    transition-delay: 320ms;
+}
+
+.reveal-stagger.visible>*:nth-child(6) {
+    transition-delay: 400ms;
+}
+
+.reveal-stagger.visible>* {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Gradient Shimmer --- */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.shimmer-text {
+    background: linear-gradient(90deg,
+            var(--color-text-light) 0%,
+            var(--color-primary-hover) 50%,
+            var(--color-text-light) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+}
+
+/* --- Floating / Parallax --- */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* --- Pulse Ring (for online indicator, etc.) --- */
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.pulse-ring {
+    position: relative;
+}
+
+.pulse-ring::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--color-success);
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+/* --- Gradient Background Animation --- */
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.gradient-bg {
+    background: linear-gradient(135deg, var(--color-bg-dark), #0a1628, var(--color-bg-dark-alt), #0c1a30);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+}
+
+/* --- Counter Animation --- */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Underline Link Hover --- */
+.link-hover {
+    position: relative;
+}
+
+.link-hover::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary-hover);
+    transition: width var(--transition-base);
+}
+
+.link-hover:hover::after {
+    width: 100%;
+}
+
+/* --- Ripple Effect for Buttons --- */
+.btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-anim 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple-anim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* --- Skeleton Loading --- */
+@keyframes skeleton-pulse {
+    0% {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    50% {
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    100% {
+        background-color: rgba(255, 255, 255, 0.04);
+    }
+}
+
+.skeleton {
+    animation: skeleton-pulse 1.8s ease-in-out infinite;
+    border-radius: var(--radius-sm);
+}
